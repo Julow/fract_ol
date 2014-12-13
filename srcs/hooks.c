@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/13 19:50:26 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/13 19:50:27 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/13 19:58:52 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/13 19:58:53 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-static t_env	*env_new()
+int				expose_hook(void *param)
 {
-	t_env			*env;
-
-	env = MAL1(t_env);
-	return (env);
+	return (0);
 }
 
-int				main(int argc, char **argv)
+int				key_hook(int key, void *param)
+{
+	return (0);
+}
+
+int				mouse_hook(int key, int x, int y, void *param)
 {
 	return (0);
 }

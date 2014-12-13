@@ -1,26 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_imagekil.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/13 19:50:26 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/13 19:50:27 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/11 19:42:50 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/11 19:42:55 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <stdlib.h>
 
-static t_env	*env_new()
+void			ft_imagekil(void *mlx, t_image *img)
 {
-	t_env			*env;
-
-	env = MAL1(t_env);
-	return (env);
-}
-
-int				main(int argc, char **argv)
-{
-	return (0);
+	mlx_destroy_image(mlx, img->img);
+	free(img);
 }
