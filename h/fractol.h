@@ -37,11 +37,17 @@ typedef struct	s_env
 	t_string		*title;
 	t_image			*img;
 	t_color			(*color)(struct s_env*, int);
+	int				color_i;
 	int				(*fractale)(struct s_env*, int, int);
 	t_ni			pos;
 	long double		zoom;
 	int				max_loop;
 }				t_env;
+
+/*
+** main.c
+*/
+void			env_exit(t_env *env);
 
 /*
 ** utils.c
@@ -60,6 +66,11 @@ void			ft_imagekil(void *mlx, t_image *img);
 */
 t_bool			get_fractale(t_env *env, char *name);
 void			draw_fractale(t_env *env);
+
+/*
+** colors.c
+*/
+void			switch_color(t_env *env);
 
 /*
 ** hooks.c

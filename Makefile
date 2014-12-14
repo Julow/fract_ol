@@ -17,7 +17,7 @@ C_DIR = srcs/
 O_DIR = o/
 LIBFT = libft/
 
-FLAGS = -Wall -Wextra -Werror -O2
+FLAGS = -Wall -Wextra -Werror -O3
 LINKS = -I$(H_DIR) -I$(LIBFT) -L$(LIBFT) -L../mlx -I../mlx -L/usr/X11/lib -lft -lmlx -lX11 -lXext -lm
 DEBUG = 0
 

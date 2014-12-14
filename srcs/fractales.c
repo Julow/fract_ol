@@ -43,18 +43,17 @@ t_bool			get_fractale(t_env *env, char *name)
 
 void			draw_fractale(t_env *env)
 {
-	int				x;
-	int				y;
+	t_pt			i;
 	int				tmp;
 
-	y = -1;
-	while (++y < HEIGHT)
+	i = PT(-1, -1);
+	while (++i.y < HEIGHT)
 	{
-		x = -1;
-		while (++x < WIDTH)
+		i.x = -1;
+		while (++i.x < WIDTH)
 		{
-			tmp = env->fractale(env, x, y);
-			ft_drawxy(env->img, x, y, env->color(env, tmp));
+			tmp = env->fractale(env, i.x, i.y);
+			ft_drawxy(env->img, i.x, i.y, env->color(env, tmp));
 		}
 	}
 }

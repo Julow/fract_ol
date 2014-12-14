@@ -13,18 +13,6 @@
 #include "fractol.h"
 #include <stdlib.h>
 
-static t_color	color(t_env *env, int loop)
-{
-	t_color			c;
-
-	if (loop == env->max_loop)
-		return (C(0x000000));
-	c.b.r = 50 * loop;
-	c.b.g = 150 * loop;
-	c.b.b = 250 * loop;
-	return (c);
-}
-
 static void		env_init(t_env *env, void *mlx, char *name)
 {
 	env->mlx = mlx;
@@ -33,10 +21,11 @@ static void		env_init(t_env *env, void *mlx, char *name)
 		env->title->content)) == NULL)
 		error("Error: mlx_new_window fail.\n");
 	env->img = ft_imagenew(mlx, PT(WIDTH, HEIGHT));
-	env->color = &color;
-	env->zoom = 250;
+	env->color_i = 0;
+	switch_color(env);
+	env->zoom = 200;
 	env->pos = NI(env->zoom / WIDTH, env->zoom / HEIGHT);
-	env->max_loop = 25;
+	env->max_loop = 30;
 	mlx_expose_hook(env->win, &expose_hook, env);
 	mlx_key_hook(env->win, &key_hook, env);
 	mlx_mouse_hook(env->win, &mouse_hook, env);
@@ -60,6 +49,15 @@ static t_bool	load_env(void *mlx, char *arg)
 	return (TRUE);
 }
 
+void			env_exit(t_env *env)
+{
+	mlx_destroy_window(env->mlx, env->win);
+	ft_stringkil(env->title);
+	ft_imagekil(env->mlx, env->img);
+	free(env);
+	exit(1);
+}
+
 int				main(int argc, char **argv)
 {
 	void			*mlx;
@@ -72,6 +70,7 @@ int				main(int argc, char **argv)
 	start = FALSE;
 	while (++i < argc)
 		start = start | load_env(mlx, argv[i]);
+	ft_putstr("Fract'ol\n'Esc' to quit\n'c' to change colors\n");
 	if ((argc <= 1 && load_env(mlx, "mandelbrot")) || start)
 		mlx_loop(mlx);
 	return (0);
