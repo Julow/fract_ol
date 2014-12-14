@@ -14,10 +14,22 @@
 
 static int		mandelbrot(t_env *env, int x, int y)
 {
-	(void)env;
-	(void)x;
-	(void)y;
-	return (0);
+	t_ni			c;
+	t_ni			z;
+	double			tmp;
+	int				i;
+
+	c = NI(x / env->zoom - env->pos.r, y / env->zoom - env->pos.i);
+	z = NI(0, 0);
+	i = 0;
+	while ((z.r * z.r + (z.i * z.i)) < 4 && i < env->max_loop)
+	{
+		tmp = z.r;
+		z.r = z.r * z.r - (z.i * z.i) + c.r;
+		z.i = 2 * z.i * tmp + c.i;
+		i++;
+	}
+	return (i);
 }
 
 t_bool			get_fractale(t_env *env, char *name)
@@ -31,5 +43,18 @@ t_bool			get_fractale(t_env *env, char *name)
 
 void			draw_fractale(t_env *env)
 {
-	(void)env;
+	int				x;
+	int				y;
+	int				tmp;
+
+	y = -1;
+	while (++y < HEIGHT)
+	{
+		x = -1;
+		while (++x < WIDTH)
+		{
+			tmp = env->fractale(env, x, y);
+			ft_drawxy(env->img, x, y, env->color(env, tmp));
+		}
+	}
 }

@@ -13,6 +13,18 @@
 #include "fractol.h"
 #include <stdlib.h>
 
+static t_color	color(t_env *env, int loop)
+{
+	t_color			c;
+
+	if (loop == env->max_loop)
+		return (C(0x000000));
+	c.b.r = 50 * loop;
+	c.b.g = 150 * loop;
+	c.b.b = 250 * loop;
+	return (c);
+}
+
 static void		env_init(t_env *env, void *mlx, char *name)
 {
 	env->mlx = mlx;
@@ -21,6 +33,10 @@ static void		env_init(t_env *env, void *mlx, char *name)
 		env->title->content)) == NULL)
 		error("Error: mlx_new_window fail.\n");
 	env->img = ft_imagenew(mlx, PT(WIDTH, HEIGHT));
+	env->color = &color;
+	env->zoom = 250;
+	env->pos = NI(env->zoom / WIDTH, env->zoom / HEIGHT);
+	env->max_loop = 25;
 	mlx_expose_hook(env->win, &expose_hook, env);
 	mlx_key_hook(env->win, &key_hook, env);
 	mlx_mouse_hook(env->win, &mouse_hook, env);

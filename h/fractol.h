@@ -24,21 +24,24 @@
 
 # define C(i)		((t_color)(t_uint)(i))
 
+typedef struct	s_ni
+{
+	double			r;
+	double			i;
+}				t_ni;
+
 typedef struct	s_env
 {
 	void			*mlx;
 	void			*win;
 	t_string		*title;
 	t_image			*img;
-	int				(*color)(struct s_env*, int);
+	t_color			(*color)(struct s_env*, int);
 	int				(*fractale)(struct s_env*, int, int);
+	t_ni			pos;
+	long double		zoom;
+	int				max_loop;
 }				t_env;
-
-typedef struct	s_ni
-{
-	double			r;
-	double			i;
-}				t_ni;
 
 /*
 ** utils.c

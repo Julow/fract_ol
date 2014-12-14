@@ -29,6 +29,13 @@ t_string		*ft_stringnews4(char *s1, char *s2, char *s3, char *s4)
 	return (str);
 }
 
+int				ft_mix(int a, int b, double pos)
+{
+	if (a > b)
+		return (a - ((a - b) * pos));
+	return (b - a) * pos + a;
+}
+
 void			error(char *str)
 {
 	ft_putstr_fd(str, 2);
