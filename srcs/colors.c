@@ -18,9 +18,9 @@ static t_color	color0(t_env *env, int loop)
 
 	if (loop == env->max_loop)
 		return (C(0x000000));
-	c.b.r = 255 - (10 * loop);
-	c.b.g = 255 - (10 * loop);
-	c.b.b = 255 - (10 * loop);
+	c.b.r = loop * env->max_loop % 200;
+	c.b.g = loop * env->max_loop % 256;
+	c.b.b = 0;
 	return (c);
 }
 
@@ -42,7 +42,9 @@ static t_color	color2(t_env *env, int loop)
 
 	if (loop == env->max_loop)
 		return (C(0x000000));
-	c.b.b = 255 - (10 * loop);
+	c.b.r = 20 * loop;
+	c.b.g = 15 * loop;
+	c.b.b = 10 * loop;
 	return (c);
 }
 

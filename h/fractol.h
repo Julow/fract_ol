@@ -14,7 +14,6 @@
 # define FRACTOL_H
 
 # include "libft.h"
-# include "ft_draw.h"
 # include <mlx.h>
 
 # define WIDTH		640
@@ -26,8 +25,8 @@
 
 typedef struct	s_ni
 {
-	double			r;
-	double			i;
+	long double		r;
+	long double		i;
 }				t_ni;
 
 typedef struct	s_env

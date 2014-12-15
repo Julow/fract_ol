@@ -81,7 +81,7 @@ int				mouse_hook(int key, int x, int y, void *param)
 		env->pos.r -= 60 / env->zoom;
 		env->pos.i -= 60 / env->zoom;
 		env->zoom += env->zoom / 5;
-		env->max_loop += 1;
+		env->max_loop += 2;
 		expose_hook(param);
 	}
 	else if (key == 5 && env->zoom > 100)
@@ -89,7 +89,7 @@ int				mouse_hook(int key, int x, int y, void *param)
 		env->pos.r += 60 / env->zoom;
 		env->pos.i += 60 / env->zoom;
 		env->zoom -= env->zoom / 5;
-		env->max_loop -= 1;
+		env->max_loop -= 2;
 		expose_hook(param);
 	}
 	(void)x;

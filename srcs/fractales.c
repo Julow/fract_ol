@@ -16,7 +16,7 @@ static int		mandelbrot(t_env *env, int x, int y)
 {
 	t_ni			c;
 	t_ni			z;
-	double			tmp;
+	long double		tmp;
 	int				i;
 
 	c = NI(x / env->zoom - env->pos.r, y / env->zoom - env->pos.i);
