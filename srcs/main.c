@@ -77,7 +77,7 @@ int				main(int argc, char **argv)
 		return (1);
 	else if (argc <= 1 && !load_env(mlx, "mandelbrot"))
 		error("Error: Please specify a fractale.\n");
-	ft_putstr("'Esc' to quit\n'c' to change colors\n");
+	ft_putstr("'Esc' to quit\n'c' to change colors\n'r' to reset position\n");
 	mlx_loop(mlx);
 	return (0);
 }

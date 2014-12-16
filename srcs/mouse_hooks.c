@@ -45,15 +45,11 @@ int				mousedown_hook(int key, int x, int y, void *param)
 	else if (key == 4 || (key == 5 && env->zoom > 10))
 	{
 		env->zoom *= (key == 4) ? 1.005 : 0.995;
-/*
-		env->offset.x *= (key == 4) ? 1.005 : 0.995;
-		env->offset.y *= (key == 4) ? 1.005 : 0.995;
-*/
+		env->offset.x += (long double)x / WIDTH * ((key == 4) ? 1.005 : 0.995);
+		env->offset.y += (long double)y / HEIGHT * ((key == 4) ? 1.005 : 0.995);
 		env->max_loop = get_loops(env->zoom);
 		env->rerender = TRUE;
 	}
-	(void)x;
-	(void)y;
 	return (0);
 }
 

@@ -22,24 +22,34 @@ static void		write_debug(t_env *env)
 	ft_stringini(&tmp);
 	ft_stringadd(&tmp, "max_loop: ");
 	ft_stringaddi(&tmp, env->max_loop);
-	mlx_string_put(env->mlx, env->win, 10, 20, 0xFFFFFF, tmp.content);
+	mlx_string_put(env->mlx, env->win, 10, 20, 0xFF0000, tmp.content);
 	ft_stringclr(&tmp);
 	ft_stringadd(&tmp, "pos: ");
 	ft_stringaddi(&tmp, env->offset.x);
 	ft_stringadd(&tmp, ", ");
 	ft_stringaddi(&tmp, env->offset.y);
-	mlx_string_put(env->mlx, env->win, 10, 40, 0xFFFFFF, tmp.content);
+	mlx_string_put(env->mlx, env->win, 10, 40, 0xFF0000, tmp.content);
 	ft_stringclr(&tmp);
 	ft_stringadd(&tmp, "zoom: ");
 	ft_stringaddd(&tmp, env->zoom, 6);
 	if (isnan(env->zoom))
 		ft_stringadd(&tmp, " (NaN)");
-	mlx_string_put(env->mlx, env->win, 10, 60, 0xFFFFFF, tmp.content);
+	mlx_string_put(env->mlx, env->win, 10, 60, 0xFF0000, tmp.content);
 	ft_stringclr(&tmp);
 	ft_stringadd(&tmp, "color: ");
 	ft_stringaddi(&tmp, env->color_i);
-	mlx_string_put(env->mlx, env->win, 10, 80, 0xFFFFFF, tmp.content);
+	mlx_string_put(env->mlx, env->win, 10, 80, 0xFF0000, tmp.content);
 	free(tmp.content);
+}
+
+static void		reset_pos(t_env *env)
+{
+	env->zoom = 200;
+	env->max_loop = DEF_LOOP;
+	env->offset = LPT(-env->fract.startpos.x, -env->fract.startpos.y);
+	env->mousepos = LPT(0, 0);
+	env->mousedown = FALSE;
+	env->rerender = TRUE;
 }
 
 int				expose_hook(void *param)
@@ -74,6 +84,8 @@ int				key_hook(int key, void *param)
 		env->max_loop -= 1;
 	else if (key == 'c')
 		switch_color(env);
+	else if (key == 'r')
+		reset_pos(env);
 	else
 		return (0);
 	env->rerender = TRUE;
