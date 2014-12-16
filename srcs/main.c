@@ -12,11 +12,12 @@
 
 #include "fractol.h"
 #include <stdlib.h>
+#include <mlx.h>
 
-static void		env_init(t_env *env, void *mlx, char *name)
+static void		env_init(t_env *env, void *mlx)
 {
 	env->mlx = mlx;
-	env->title = ft_stringnews4("Fract'ol :: ", name, " ::", NULL);
+	env->title = ft_stringnews4("Fract'ol :: ", env->fract.name, " ::", NULL);
 	if ((env->win = mlx_new_window(mlx, WIDTH, HEIGHT,
 		env->title->content)) == NULL)
 		error("Error: mlx_new_window fail.\n");
@@ -24,9 +25,9 @@ static void		env_init(t_env *env, void *mlx, char *name)
 	env->color_i = 0;
 	switch_color(env);
 	env->zoom = 200;
-	env->max_loop = 30;
-	env->offset = PT(-420, -240);
-	env->mousepos = PT(0, 0);
+	env->max_loop = DEF_LOOP;
+	env->offset = LPT(-env->fract.startpos.x, -env->fract.startpos.y);
+	env->mousepos = LPT(0, 0);
 	env->mousedown = FALSE;
 	env->rerender = FALSE;
 	mlx_expose_hook(env->win, &expose_hook, env);
@@ -45,13 +46,13 @@ static t_bool	load_env(void *mlx, char *arg)
 	ft_strlower(arg);
 	if (!get_fractale(env, arg))
 	{
-		ft_putstr_fd("Error: Bad fractale: ", 2);
+		ft_putstr_fd("Error: Fractale not supported: ", 2);
 		ft_putstr_fd(arg, 2);
 		ft_putstr_fd("\n", 2);
 		free(env);
 		return (FALSE);
 	}
-	env_init(env, mlx, arg);
+	env_init(env, mlx);
 	return (TRUE);
 }
 
@@ -70,15 +71,12 @@ int				main(int argc, char **argv)
 
 	if ((mlx = mlx_init()) == NULL)
 		error("Error: mlx_init fail.\n");
-	ft_putstr("Fract'ol\n");
-	ft_putstr("Supported fractales: Mandelbrot(0), Julia(1), 2\n");
+	ft_putstr("Fract'ol\nSupported fractales: Mandelbrot(0), Julia(1), 2\n");
 	ft_putstr("==============================\n");
 	if (argc > 1 && !load_env(mlx, argv[1]))
-		error("Error: Fractale not supported.\n");
-	else if (!load_env(mlx, "mandelbrot"))
+		return (1);
+	else if (argc <= 1 && !load_env(mlx, "mandelbrot"))
 		error("Error: Please specify a fractale.\n");
-	else
-		ft_putstr("Default fractale: Mandelbrot\n");
 	ft_putstr("'Esc' to quit\n'c' to change colors\n");
 	mlx_loop(mlx);
 	return (0);

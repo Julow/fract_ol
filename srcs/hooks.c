@@ -12,6 +12,8 @@
 
 #include "fractol.h"
 #include <stdlib.h>
+#include <mlx.h>
+#include <math.h>
 
 static void		write_debug(t_env *env)
 {
@@ -30,6 +32,8 @@ static void		write_debug(t_env *env)
 	ft_stringclr(&tmp);
 	ft_stringadd(&tmp, "zoom: ");
 	ft_stringaddd(&tmp, env->zoom, 6);
+	if (isnan(env->zoom))
+		ft_stringadd(&tmp, " (NaN)");
 	mlx_string_put(env->mlx, env->win, 10, 60, 0xFFFFFF, tmp.content);
 	ft_stringclr(&tmp);
 	ft_stringadd(&tmp, "color: ");

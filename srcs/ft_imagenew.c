@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <mlx.h>
 
 t_image			*ft_imagenew(void *mlx, t_pt size)
 {

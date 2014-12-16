@@ -18,23 +18,41 @@
 */
 
 # include "libft.h"
-# include <mlx.h>
-# include <math.h>
 
 # define WIDTH		600
-# define HEIGHT		480
+# define HEIGHT		460
+
+# define MIDDLE		(PT(WIDTH / 2, HEIGHT / 2))
+
+# define DEF_LOOP	27
 
 # define MAX_I		16
+
+# define LPT(x,y)	((t_lpt){(x), (y)})
 
 # define NI(r,i)	((t_ni){(r), (i)})
 
 # define C(i)		((t_color)(t_uint)(i))
+
+typedef struct	s_lpt
+{
+	t_long			x;
+	t_long			y;
+}				t_lpt;
 
 typedef struct	s_ni
 {
 	long double		r;
 	long double		i;
 }				t_ni;
+
+typedef struct	s_fract
+{
+	char			*name;
+	int				(*f)();
+	t_bool			mouserender;
+	t_pt			startpos;
+}				t_fract;
 
 typedef struct	s_env
 {
@@ -44,11 +62,11 @@ typedef struct	s_env
 	t_image			*img;
 	t_color			(*color)(struct s_env*, int);
 	int				color_i;
-	int				(*fractale)(struct s_env*, int, int);
+	t_fract			fract;
 	long double		zoom;
 	int				max_loop;
-	t_pt			offset;
-	t_pt			mousepos;
+	t_lpt			offset;
+	t_lpt			mousepos;
 	t_bool			mousedown;
 	t_bool			rerender;
 }				t_env;

@@ -12,7 +12,7 @@
 
 #include "fractol.h"
 
-static int		mandelbrot(t_env *env, int x, int y)
+static int		mandelbrot(t_env *env, t_long x, t_long y)
 {
 	t_ni			c;
 	t_ni			z;
@@ -32,7 +32,7 @@ static int		mandelbrot(t_env *env, int x, int y)
 	return (i);
 }
 
-static int		julia(t_env *env, int x, int y)
+static int		julia(t_env *env, t_long x, t_long y)
 {
 	t_ni			c;
 	t_ni			z;
@@ -53,7 +53,7 @@ static int		julia(t_env *env, int x, int y)
 	return (i);
 }
 
-static int		fractale2(t_env *env, int x, int y)
+static int		fractale2(t_env *env, t_long x, t_long y)
 {
 	t_ni			c;
 	t_ni			z;
@@ -64,7 +64,7 @@ static int		fractale2(t_env *env, int x, int y)
 	i = 0;
 	while ((z.r * z.r + (z.i * z.i)) < MAX_I && i < env->max_loop)
 	{
-		z = (ft_ni_mult(z, z));
+		z = ft_ni_mult(ft_ni_mult(ft_ni_mult(ft_ni_mult(z, z), z), z), z);
 		z.r += c.r;
 		z.i += c.i;
 		i++;
@@ -75,11 +75,11 @@ static int		fractale2(t_env *env, int x, int y)
 t_bool			get_fractale(t_env *env, char *name)
 {
 	if (name[0] == '\0' || ft_match(name, "ma*") || ft_strequ(name, "0"))
-		env->fractale = &mandelbrot;
+		env->fract = (t_fract){"Mandelbrot", &mandelbrot, 0, PT(420, 230)};
 	else if (ft_match(name, "ju*") || ft_strequ(name, "1"))
-		env->fractale = &julia;
+		env->fract = (t_fract){"Julia", &julia, TRUE, MIDDLE};
 	else if (ft_strequ(name, "2"))
-		env->fractale = &fractale2;
+		env->fract = (t_fract){"f(z) = z^5 + c", &fractale2, 0, MIDDLE};
 	else
 		return (FALSE);
 	return (TRUE);
@@ -87,18 +87,18 @@ t_bool			get_fractale(t_env *env, char *name)
 
 void			draw_fractale(t_env *env)
 {
-	t_pt			i;
+	t_lpt			i;
 	int				tmp;
-	t_pt			ffset;
+	t_lpt			ffset;
 
-	ffset = PT(WIDTH + env->offset.x, HEIGHT + env->offset.y);
+	ffset = LPT(WIDTH + env->offset.x, HEIGHT + env->offset.y);
 	i = env->offset;
 	while (++i.y < ffset.y)
 	{
 		i.x = env->offset.x;
 		while (++i.x < ffset.x)
 		{
-			tmp = env->fractale(env, i.x, i.y);
+			tmp = env->fract.f(env, i.x, i.y);
 			ft_drawxy(env->img, i.x - env->offset.x, i.y - env->offset.y,
 				env->color(env, tmp));
 		}

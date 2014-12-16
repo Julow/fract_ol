@@ -12,6 +12,7 @@
 
 #include "fractol.h"
 #include <stdlib.h>
+#include <mlx.h>
 
 void			ft_imagekil(void *mlx, t_image *img)
 {

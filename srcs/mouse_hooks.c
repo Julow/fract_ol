@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <math.h>
 
 int				mouseup_hook(int key, int x, int y, void *param)
 {
@@ -24,6 +25,16 @@ int				mouseup_hook(int key, int x, int y, void *param)
 	return (0);
 }
 
+inline int		get_loops(long double zoom)
+{
+	int				i;
+
+	i = 0;
+	while ((zoom /= 1.5) > 1)
+		i++;
+	return (i * 2 + DEF_LOOP);
+}
+
 int				mousedown_hook(int key, int x, int y, void *param)
 {
 	t_env			*env;
@@ -31,12 +42,14 @@ int				mousedown_hook(int key, int x, int y, void *param)
 	env = (t_env*)param;
 	if (key == 1)
 		env->mousedown = TRUE;
-	else if (key == 4 || (key == 5 && env->zoom > 100))
+	else if (key == 4 || (key == 5 && env->zoom > 10))
 	{
 		env->zoom *= (key == 4) ? 1.005 : 0.995;
+/*
 		env->offset.x *= (key == 4) ? 1.005 : 0.995;
 		env->offset.y *= (key == 4) ? 1.005 : 0.995;
-		env->max_loop = MAX((int)(log(env->zoom) * 5), 30);
+*/
+		env->max_loop = get_loops(env->zoom);
 		env->rerender = TRUE;
 	}
 	(void)x;
@@ -47,15 +60,19 @@ int				mousedown_hook(int key, int x, int y, void *param)
 int				mousemove_hook(int x, int y, void *param)
 {
 	t_env			*env;
+	t_lpt			pos;
 
+	pos = LPT((t_long)x, (t_long)y);
 	env = (t_env*)param;
 	if (env->mousedown)
 	{
-		env->offset.x += env->mousepos.x - x;
-		env->offset.y += env->mousepos.y - y;
+		env->offset.x += env->mousepos.x - pos.x;
+		env->offset.y += env->mousepos.y - pos.y;
+		env->rerender = TRUE;
 	}
-	env->mousepos.x = x;
-	env->mousepos.y = y;
-	env->rerender = TRUE;
+	else if (env->fract.mouserender)
+		env->rerender = TRUE;
+	env->mousepos.x = pos.x;
+	env->mousepos.y = pos.y;
 	return (0);
 }
