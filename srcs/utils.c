@@ -29,6 +29,21 @@ t_string		*ft_stringnews4(char *s1, char *s2, char *s3, char *s4)
 	return (str);
 }
 
+t_ni			ft_ni_mult(t_ni a, t_ni b)
+{
+	long double		ar;
+
+	ar = a.r;
+	a.r = a.r * b.r - (a.i * b.i);
+	a.i = a.i * b.r + (ar * b.i);
+	return (a);
+}
+
+t_ni			ft_ni_plus(t_ni a, t_ni b)
+{
+	return (NI(a.r + b.r, a.i + b.i));
+}
+
 void			error(char *str)
 {
 	ft_putstr_fd(str, 2);

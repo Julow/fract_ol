@@ -13,11 +13,18 @@
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
+/*
+** fractales from http://www.lifesmith.com/formulas.html
+*/
+
 # include "libft.h"
 # include <mlx.h>
+# include <math.h>
 
-# define WIDTH		640
+# define WIDTH		600
 # define HEIGHT		480
+
+# define MAX_I		16
 
 # define NI(r,i)	((t_ni){(r), (i)})
 
@@ -38,9 +45,12 @@ typedef struct	s_env
 	t_color			(*color)(struct s_env*, int);
 	int				color_i;
 	int				(*fractale)(struct s_env*, int, int);
-	t_ni			pos;
 	long double		zoom;
 	int				max_loop;
+	t_pt			offset;
+	t_pt			mousepos;
+	t_bool			mousedown;
+	t_bool			rerender;
 }				t_env;
 
 /*
@@ -52,6 +62,8 @@ void			env_exit(t_env *env);
 ** utils.c
 */
 t_string		*ft_stringnews4(char *s1, char *s2, char *s3, char *s4);
+t_ni			ft_ni_mult(t_ni a, t_ni b);
+t_ni			ft_ni_plus(t_ni a, t_ni b);
 void			error(char *str);
 
 /*
@@ -73,10 +85,13 @@ void			switch_color(t_env *env);
 
 /*
 ** hooks.c
+** mouse_hooks.c
 */
 int				expose_hook(void *param);
 int				key_hook(int key, void *param);
-int				mouse_hook(int key, int x, int y, void *param);
 int				loop_hook(void *param);
+int				mouseup_hook(int key, int x, int y, void *param);
+int				mousedown_hook(int key, int x, int y, void *param);
+int				mousemove_hook(int x, int y, void *param);
 
 #endif
