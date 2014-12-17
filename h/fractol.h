@@ -32,8 +32,6 @@
 
 # define NI(r,i)	((t_ni){(r), (i)})
 
-# define C(i)		((t_color)(t_uint)(i))
-
 typedef struct	s_lpt
 {
 	t_long			x;
