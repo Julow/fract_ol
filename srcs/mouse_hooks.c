@@ -38,15 +38,19 @@ inline int		get_loops(long double zoom)
 int				mousedown_hook(int key, int x, int y, void *param)
 {
 	t_env			*env;
+	t_ni			tmp;
 
 	env = (t_env*)param;
 	if (key == 1)
 		env->mousedown = TRUE;
 	else if (key == 4 || (key == 5 && env->zoom > 10))
 	{
+		x += env->offset.x;
+		y += env->offset.y;
+		tmp = NI(x / env->zoom, y / env->zoom);
 		env->zoom *= (key == 4) ? 1.005 : 0.995;
-		env->offset.x += (long double)x / WIDTH * ((key == 4) ? 1.005 : 0.995);
-		env->offset.y += (long double)y / HEIGHT * ((key == 4) ? 1.005 : 0.995);
+		env->offset.x += (tmp.r - (x / env->zoom)) * env->zoom;
+		env->offset.y += (tmp.i - (y / env->zoom)) * env->zoom;
 		env->max_loop = get_loops(env->zoom);
 		env->rerender = TRUE;
 	}

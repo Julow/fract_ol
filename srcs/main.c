@@ -25,7 +25,7 @@ static void		env_init(t_env *env, void *mlx)
 	env->color_i = 0;
 	switch_color(env);
 	env->zoom = 200;
-	env->max_loop = DEF_LOOP;
+	env->max_loop = DEF_LOOP * 2;
 	env->offset = LPT(-env->fract.startpos.x, -env->fract.startpos.y);
 	env->mousepos = LPT(0, 0);
 	env->mousedown = FALSE;

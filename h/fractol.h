@@ -24,7 +24,7 @@
 
 # define MIDDLE		(PT(WIDTH / 2, HEIGHT / 2))
 
-# define DEF_LOOP	27
+# define DEF_LOOP	25
 
 # define MAX_I		16
 
