@@ -30,7 +30,7 @@ inline int		get_loops(long double zoom)
 	int				i;
 
 	i = 0;
-	while ((zoom /= 1.5) > 1)
+	while ((zoom /= 1.33) > 1)
 		i++;
 	return (i * 2 + DEF_LOOP);
 }
@@ -38,6 +38,7 @@ inline int		get_loops(long double zoom)
 int				mousedown_hook(int key, int x, int y, void *param)
 {
 	t_env			*env;
+	t_lpt			pos;
 	t_ni			tmp;
 
 	env = (t_env*)param;
@@ -45,12 +46,11 @@ int				mousedown_hook(int key, int x, int y, void *param)
 		env->mousedown = TRUE;
 	else if (key == 4 || (key == 5 && env->zoom > 10))
 	{
-		x += env->offset.x;
-		y += env->offset.y;
-		tmp = NI(x / env->zoom, y / env->zoom);
+		pos = LPT(env->offset.x + x, env->offset.y + y);
+		tmp = NI(pos.x / env->zoom, pos.y / env->zoom);
 		env->zoom *= (key == 4) ? 1.005 : 0.995;
-		env->offset.x += (tmp.r - (x / env->zoom)) * env->zoom;
-		env->offset.y += (tmp.i - (y / env->zoom)) * env->zoom;
+		env->offset.x += (tmp.r - (pos.x / env->zoom)) * env->zoom;
+		env->offset.y += (tmp.i - (pos.y / env->zoom)) * env->zoom;
 		env->max_loop = get_loops(env->zoom);
 		env->rerender = TRUE;
 	}

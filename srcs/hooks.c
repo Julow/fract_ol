@@ -25,9 +25,9 @@ static void		write_debug(t_env *env)
 	mlx_string_put(env->mlx, env->win, 10, 20, 0xFF0000, tmp.content);
 	ft_stringclr(&tmp);
 	ft_stringadd(&tmp, "pos: ");
-	ft_stringaddi(&tmp, env->offset.x);
+	ft_stringaddil(&tmp, env->offset.x);
 	ft_stringadd(&tmp, ", ");
-	ft_stringaddi(&tmp, env->offset.y);
+	ft_stringaddil(&tmp, env->offset.y);
 	mlx_string_put(env->mlx, env->win, 10, 40, 0xFF0000, tmp.content);
 	ft_stringclr(&tmp);
 	ft_stringadd(&tmp, "zoom: ");
