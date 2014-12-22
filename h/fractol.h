@@ -26,7 +26,7 @@
 
 # define DEF_LOOP	25
 
-# define MAX_I		16
+# define MAX_I		8
 
 # define LPT(x,y)	((t_lpt){(x), (y)})
 

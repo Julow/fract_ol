@@ -48,7 +48,7 @@ int				mousedown_hook(int key, int x, int y, void *param)
 	{
 		pos = LPT(env->offset.x + x, env->offset.y + y);
 		tmp = NI(pos.x / env->zoom, pos.y / env->zoom);
-		env->zoom *= (key == 4) ? 1.005 : 0.995;
+		env->zoom *= (key == 4) ? 1.05 : 0.95;
 		env->offset.x += (tmp.r - (pos.x / env->zoom)) * env->zoom;
 		env->offset.y += (tmp.i - (pos.y / env->zoom)) * env->zoom;
 		env->max_loop = get_loops(env->zoom);

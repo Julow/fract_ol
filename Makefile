@@ -30,12 +30,12 @@ all:
 	@if [ "$(DEBUG)" -eq "1" ]; then make -j3 _debug $(NAME); else make -j3 $(NAME); fi
 
 $(NAME): $(O_FILES)
-	@gcc $(FLAGS) $(LINKS) -o $@ $(O_FILES) && printf "\033[0;32m%-24s\033[1;30m<<--\033[0;0m\n" "$@" || printf "\033[0;31m%-24s\033[1;30m<<--\033[0;0m\n" "$@"
+	@gcc $(FLAGS) -o $@ $(O_FILES) $(LINKS) && printf "\033[0;32m%-24s\033[1;30m<<--\033[0;0m\n" "$@" || printf "\033[0;31m%-24s\033[1;30m<<--\033[0;0m\n" "$@"
 
 $(O_DIR)%.o: $(C_DIR)%.c
 	@mkdir $(O_DIR) 2> /dev/null || echo "" > /dev/null
 	@printf "\033[1;30m"
-	@gcc $(FLAGS) $(LINKS) -o $@ -c $< && printf "\033[0;0m%-24s\033[1;30m-->>	\033[0;32m$@\033[0;0m\n" "$<" || (printf "\033[0;0m%-24s\033[1;30m-->>	\033[0;31m$@\033[0;0m\n" "$<" && exit 1)
+	@gcc $(FLAGS) -o $@ -c $< $(LINKS) && printf "\033[0;0m%-24s\033[1;30m-->>	\033[0;32m$@\033[0;0m\n" "$<" || (printf "\033[0;0m%-24s\033[1;30m-->>	\033[0;31m$@\033[0;0m\n" "$<" && exit 1)
 
 debug: _debug all
 

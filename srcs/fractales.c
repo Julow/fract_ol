@@ -16,41 +16,43 @@ static int		mandelbrot(t_env *env, t_long x, t_long y)
 {
 	t_ni			c;
 	t_ni			z;
-	long double		tmp;
+	t_ni			sq;
 	int				i;
 
 	c = NI(x / env->zoom, y / env->zoom);
 	z = NI(0, 0);
-	i = 0;
-	while ((z.r * z.r + (z.i * z.i)) < MAX_I && i < env->max_loop)
+	sq = NI(0, 0);
+	i = env->max_loop;
+	while ((sq.r + sq.i) < MAX_I && --i > 0)
 	{
-		tmp = z.r;
-		z.r = z.r * z.r - (z.i * z.i) + c.r;
-		z.i = 2 * z.i * tmp + c.i;
-		i++;
+		sq.r = z.r * z.r;
+		sq.i = z.i * z.i;
+		z.i = 2 * z.i * z.r + c.i;
+		z.r = sq.r - sq.i + c.r;
 	}
-	return (i);
+	return (env->max_loop - i);
 }
 
 static int		julia(t_env *env, t_long x, t_long y)
 {
 	t_ni			c;
 	t_ni			z;
-	long double		tmp;
+	t_ni			sq;
 	int				i;
 
-	c = NI((env->offset.x - env->mousepos.x) / env->zoom,
-		(env->offset.y - env->mousepos.y) / env->zoom);
+	c = NI((env->offset.x - (env->mousepos.x - WIDTH)) / env->zoom,
+		(env->offset.y - (env->mousepos.y - HEIGHT)) / env->zoom);
 	z = NI(x / env->zoom, y / env->zoom);
-	i = 0;
-	while ((z.r * z.r + (z.i * z.i)) < MAX_I && i < env->max_loop)
+	sq = NI(z.r * z.r, z.i * z.i);
+	i = env->max_loop;
+	while ((sq.r + sq.i) < MAX_I && --i > 0)
 	{
-		tmp = z.r;
-		z.r = z.r * z.r - (z.i * z.i) + c.r;
-		z.i = 2 * z.i * tmp + c.i;
-		i++;
+		sq.r = z.r * z.r;
+		sq.i = z.i * z.i;
+		z.i = 2 * z.i * z.r + c.i;
+		z.r = sq.r - sq.i + c.r;
 	}
-	return (i);
+	return (env->max_loop - i);
 }
 
 static int		fractale2(t_env *env, t_long x, t_long y)
