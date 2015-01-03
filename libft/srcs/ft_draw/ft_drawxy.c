@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_drawxy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/11 16:40:16 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/11 16:40:17 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+void			ft_drawxy(t_image *img, int x, int y, t_color color)
+{
+	if (x < 0 || x >= img->width || y < 0 || y >= img->height)
+		return ;
+	if (ALPHA(color))
+		ft_resalpha(&color, ft_imagept(img, PT(x, y)));
+	ft_imageput(img, (img->width * y + x) * img->opp, color);
+}

@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_imagepos.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/17 19:14:11 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/17 19:14:11 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
 
-# include "libft.h"
+t_color			ft_imagepos(t_image *img, int pos)
+{
+	t_color			c;
+	int				i;
 
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+	c = C(0xFF000000);
+	i = -1;
+	while (++i < img->opp)
+	{
+		c.u = c.u >> 8;
+		c.b.a = img->data[pos + i];
+	}
+	c.u = c.u << (4 - img->opp);
+	return (c);
+}

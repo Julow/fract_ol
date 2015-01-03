@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_tabset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/14 22:04:44 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/14 22:04:44 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+void			ft_tabset(t_tab *tab, const void *set, int index, int n)
+{
+	if ((index + n) > tab->length)
+	{
+		if (ft_tabext(tab, index + n - tab->length))
+		{
+			tab->length += index + n - tab->length;
+			tab->bytes = tab->length * tab->size;
+		}
+		else
+			n = tab->length - index;
+	}
+	ft_memmove(tab->data + (index * tab->size), set, n * tab->size);
+}

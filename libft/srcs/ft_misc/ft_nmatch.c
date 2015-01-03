@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_nmatch.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/15 15:05:07 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/15 15:05:08 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+int				ft_nmatch(char *str, char *pattern)
+{
+	while (*str == '\0' && *pattern == '*')
+		pattern++;
+	if (*str == '\0' || *pattern == '\0')
+		return ((*str == *pattern) ? 1 : 0);
+	if (*pattern == '*')
+		return (ft_nmatch(str, pattern + 1) + ft_nmatch(str + 1, pattern));
+	return ((*str == *pattern) ? ft_nmatch(str + 1, pattern + 1) : 0);
+}
