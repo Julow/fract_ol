@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_putendl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/11/04 17:36:46 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/11/04 17:36:47 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
+#include <unistd.h>
 
-# include "libft.h"
-
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+int				ft_putendl(const char *s)
+{
+	return (ft_putstr(s) + ft_putchar('\n'));
+}

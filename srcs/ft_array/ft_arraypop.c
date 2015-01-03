@@ -1,21 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_arraypop.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juloo <juloo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/28 23:48:22 by juloo             #+#    #+#             */
+/*   Updated: 2014/12/28 23:48:22 by juloo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
 
-# include "libft.h"
+void			*ft_arraypop(t_array *array)
+{
+	void			*tmp;
 
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+	if (array->length > 0)
+	{
+		array->length--;
+		tmp = array->data[array->length];
+		array->data[array->length] = NULL;
+	}
+	else
+		tmp = NULL;
+	return (tmp);
+}

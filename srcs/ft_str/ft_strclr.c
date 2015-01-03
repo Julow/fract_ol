@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/11/04 14:19:49 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/11/04 14:19:50 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
 
-# include "libft.h"
+void			ft_strclr(char *s)
+{
+	t_uint			i;
 
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+	i = 0;
+	while (s != NULL && s[i] != '\0')
+	{
+		s[i] = '\0';
+		i++;
+	}
+}

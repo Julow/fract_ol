@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/11/04 14:35:47 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/11/04 14:35:49 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
 
-# include "libft.h"
+t_bool			ft_strequ(const char *s1, const char *s2)
+{
+	t_uint			i;
 
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+	if (s1 == NULL || s2 == NULL)
+		return ((s1 == s2) ? TRUE : FALSE);
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] != '\0')
+		i++;
+	return ((s1[i] == s2[i]) ? TRUE : FALSE);
+}

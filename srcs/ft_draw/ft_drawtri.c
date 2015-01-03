@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_drawtri.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: juloo <juloo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/25 20:24:30 by juloo             #+#    #+#             */
+/*   Updated: 2014/12/25 20:24:30 by juloo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+void			ft_drawtri(t_image *img, t_pt pts[3], t_color color)
+{
+	ft_drawline(img, pts[0], pts[1], color);
+	ft_drawline(img, pts[0], pts[2], color);
+	ft_drawline(img, pts[1], pts[2], color);
+}

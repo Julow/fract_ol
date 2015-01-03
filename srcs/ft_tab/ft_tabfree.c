@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_tabfree.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/14 22:05:07 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/14 22:05:07 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
+#include <stdlib.h>
 
-# include "libft.h"
+void			ft_tabfree(t_tab *tab)
+{
+	t_byte			*tmp;
 
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+	if (tab->bytes >= tab->alloc_bytes)
+		return ;
+	tmp = MAL(t_byte, tab->bytes);
+	if (tmp == NULL)
+		return ;
+	tab->alloc_bytes = tab->bytes;
+	if (tab->data != NULL)
+	{
+		ft_memcpy(tmp, tab->data, tab->bytes);
+		free(tab->data);
+	}
+	tab->data = tmp;
+}

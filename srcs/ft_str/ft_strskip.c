@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_strskip.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/30 23:08:15 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/30 23:08:15 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
 
-# include "libft.h"
+/*
+** Count the len of 'str' using only char of 'skip'
+*/
+t_uint			ft_strskip(const char *str, const char *skip)
+{
+	t_uint			i;
 
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+	i = 0;
+	while (str[i] != '\0' && ft_strchr(skip, str[i]) != NULL)
+		i++;
+	return (i);
+}

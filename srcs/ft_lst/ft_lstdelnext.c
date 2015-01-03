@@ -1,21 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_lstdelnext.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/29 19:52:35 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/29 19:52:35 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
+#include <stdlib.h>
 
-# include "libft.h"
+void			ft_lstdelnext(t_list *lst, void (*f)(void*, t_uint))
+{
+	t_list			*tmp;
 
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+	if (lst == NULL || lst->next == NULL)
+		return ;
+	tmp = lst->next;
+	lst->next = tmp->next;
+	if (f != NULL)
+		f(tmp->content, tmp->content_size);
+	free(tmp);
+}

@@ -1,21 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_strnadd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/11/06 13:57:14 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/11/06 13:57:15 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
+#include <stdlib.h>
 
-# include "libft.h"
+void			ft_strnadd(char **str, char const *add, t_uint len)
+{
+	t_uint			lenstr;
+	char			*tmp;
 
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+	tmp = *str;
+	lenstr = ft_strlen(tmp);
+	*str = MAL(char, lenstr + len + 1);
+	if (*str == NULL)
+	{
+		*str = tmp;
+		return ;
+	}
+	if (lenstr > 0)
+		ft_memcpy(*str, tmp, lenstr);
+	if (len > 0)
+		ft_memcpy(*str, add, len);
+	if (tmp != NULL)
+		free(tmp);
+}

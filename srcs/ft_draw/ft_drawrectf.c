@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_internal.h                                      :+:      :+:    :+:   */
+/*   ft_drawrectf.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/30 19:49:39 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/30 19:49:41 by jaguillo         ###   ########.fr       */
+/*   Created: 2014/12/11 14:48:00 by jaguillo          #+#    #+#             */
+/*   Updated: 2014/12/11 14:48:01 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTERNAL_H
-# define FT_INTERNAL_H
+#include "libft.h"
 
-# include "libft.h"
-
-# define PUTNBR_BUFF	11
-# define PUTLONG_BUFF	21
-
-#endif
+void			ft_drawrectf(t_image *img, t_rect rect, t_color color)
+{
+	ft_resrect(&rect, RECT(0, 0, img->width, img->height));
+	rect.height += rect.y;
+	while (rect.height >= rect.y)
+	{
+		ft_drawnpt(img, PT(rect.x, rect.height), rect.width, color);
+		rect.height--;
+	}
+}
