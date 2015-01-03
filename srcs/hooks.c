@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:58:52 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/13 19:58:53 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/03 17:31:47 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void		write_debug(t_env *env)
 static void		reset_pos(t_env *env)
 {
 	env->zoom = 200;
-	env->max_loop = DEF_LOOP;
+	env->max_loop = DEF_LOOP * 5;
 	env->offset = LPT(-env->fract.startpos.x, -env->fract.startpos.y);
 	env->mousepos = LPT(0, 0);
 	env->mousedown = FALSE;

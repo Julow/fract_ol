@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:50:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/13 19:50:52 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/03 17:28:31 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 
 # define MIDDLE		(PT(WIDTH / 2, HEIGHT / 2))
 
-# define DEF_LOOP	25
+# define DEF_LOOP	30
 
 # define MAX_I		8
 

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:50:26 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/16 13:26:59 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/03 17:31:58 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void		env_init(t_env *env, void *mlx)
 	env->color_i = 0;
 	switch_color(env);
 	env->zoom = 200;
-	env->max_loop = DEF_LOOP * 2;
+	env->max_loop = DEF_LOOP * 5;
 	env->offset = LPT(-env->fract.startpos.x, -env->fract.startpos.y);
 	env->mousepos = LPT(0, 0);
 	env->mousedown = FALSE;

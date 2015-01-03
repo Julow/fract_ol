@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/14 01:02:10 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/14 01:02:10 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/03 17:36:56 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int		julia(t_env *env, t_long x, t_long y)
 		(env->offset.y - (env->mousepos.y - HEIGHT)) / env->zoom);
 	z = NI(x / env->zoom, y / env->zoom);
 	sq = NI(z.r * z.r, z.i * z.i);
-	i = env->max_loop;
+	i = env->max_loop * 1.5;
 	while ((sq.r + sq.i) < MAX_I && --i > 0)
 	{
 		sq.r = z.r * z.r;
@@ -59,19 +59,24 @@ static int		fractale2(t_env *env, t_long x, t_long y)
 {
 	t_ni			c;
 	t_ni			z;
+	t_ni			sq;
 	int				i;
 
-	c = NI(x / env->zoom, y / env->zoom);
-	z = NI(0, 0);
-	i = 0;
-	while ((z.r * z.r + (z.i * z.i)) < MAX_I && i < env->max_loop)
+	c = NI((env->offset.x - (env->mousepos.x - WIDTH)) / env->zoom,
+		(env->offset.y - (env->mousepos.y - HEIGHT)) / env->zoom);
+	z = NI(x / env->zoom, y / env->zoom);
+	z.r = ABS(z.r);
+	z.i = ABS(z.i);
+	sq = NI(z.r * z.r, z.i * z.i);
+	i = env->max_loop * 1.5;
+	while ((sq.r + sq.i) < MAX_I && --i > 0)
 	{
-		z = ft_ni_mult(ft_ni_mult(ft_ni_mult(ft_ni_mult(z, z), z), z), z);
-		z.r += c.r;
-		z.i += c.i;
-		i++;
+		sq.r = sq.r * z.i;
+		sq.i = sq.i * z.r;
+		z.i = 2 * z.i * z.r + c.i;
+		z.r = sq.r - sq.i + c.r;
 	}
-	return (i);
+	return (env->max_loop - i);
 }
 
 t_bool			get_fractale(t_env *env, char *name)
@@ -81,7 +86,7 @@ t_bool			get_fractale(t_env *env, char *name)
 	else if (ft_match(name, "ju*") || ft_strequ(name, "1"))
 		env->fract = (t_fract){"Julia", &julia, TRUE, MIDDLE};
 	else if (ft_strequ(name, "2"))
-		env->fract = (t_fract){"f(z) = z^5 + c", &fractale2, 0, MIDDLE};
+		env->fract = (t_fract){"...", &fractale2, TRUE, MIDDLE};
 	else
 		return (FALSE);
 	return (TRUE);

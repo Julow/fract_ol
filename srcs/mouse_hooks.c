@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/16 14:36:16 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/16 14:36:16 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/03 17:36:34 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ inline int		get_loops(long double zoom)
 	int				i;
 
 	i = 0;
-	while ((zoom /= 1.33) > 1)
+	while ((zoom /= 1.2) > 1)
 		i++;
 	return (i * 2 + DEF_LOOP);
 }

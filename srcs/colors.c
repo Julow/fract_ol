@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/14 12:46:17 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/03 02:26:47 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/03 17:33:47 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,8 @@ static t_color	color0(t_env *env, int loop)
 
 	if (loop == env->max_loop)
 		return (C(0xFF000000));
-	c.b.r = 250;
-	c.b.g = 250;
-	c.b.b = 250;
-	c.b.a = loop % 64;
+	c.b = RGB(255, loop * 255 / env->max_loop, 0);
+	c.b.a = 0xFF;
 	return (c);
 }
 
@@ -44,7 +42,7 @@ static t_color	color2(t_env *env, int loop)
 
 	if (loop == env->max_loop)
 		return (C(0xFF000000));
-	loop = loop % 15 * 40;
+	loop = loop * 600 / env->max_loop;
 	if (loop < 100)
 		c.b = RGB(255, loop * 25, 0);
 	else if (loop < 200)
@@ -67,7 +65,9 @@ static t_color	color3(t_env *env, int loop)
 
 	if (loop == env->max_loop)
 		return (C(0xFF000000));
-	c.i = loop * 255 / env->max_loop;
+	c.b.b = loop * 255 / env->max_loop;
+	c.b.r = 0;
+	c.b.g = 0;
 	c.b.a = 0xFF;
 	return (c);
 }
