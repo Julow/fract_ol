@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:50:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/03 17:28:31 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/14 12:03:35 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 # include "libft.h"
 
-# define WIDTH		600
-# define HEIGHT		460
+# define WIDTH		590
+# define HEIGHT		440
 
 # define MIDDLE		(PT(WIDTH / 2, HEIGHT / 2))
 
@@ -63,6 +63,7 @@ typedef struct	s_env
 	t_fract			fract;
 	long double		zoom;
 	int				max_loop;
+	int				offset_loop;
 	t_lpt			offset;
 	t_lpt			mousepos;
 	t_bool			mousedown;

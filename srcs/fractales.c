@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/14 01:02:10 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/03 17:36:56 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/14 12:18:51 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int		mandelbrot(t_env *env, t_long x, t_long y)
 	c = NI(x / env->zoom, y / env->zoom);
 	z = NI(0, 0);
 	sq = NI(0, 0);
-	i = env->max_loop;
+	i = env->max_loop + env->offset_loop;
 	while ((sq.r + sq.i) < MAX_I && --i > 0)
 	{
 		sq.r = z.r * z.r;
@@ -44,7 +44,7 @@ static int		julia(t_env *env, t_long x, t_long y)
 		(env->offset.y - (env->mousepos.y - HEIGHT)) / env->zoom);
 	z = NI(x / env->zoom, y / env->zoom);
 	sq = NI(z.r * z.r, z.i * z.i);
-	i = env->max_loop * 1.5;
+	i = env->max_loop * 1.5 + env->offset_loop;
 	while ((sq.r + sq.i) < MAX_I && --i > 0)
 	{
 		sq.r = z.r * z.r;
@@ -68,7 +68,7 @@ static int		fractale2(t_env *env, t_long x, t_long y)
 	z.r = ABS(z.r);
 	z.i = ABS(z.i);
 	sq = NI(z.r * z.r, z.i * z.i);
-	i = env->max_loop * 1.5;
+	i = env->max_loop + env->offset_loop;
 	while ((sq.r + sq.i) < MAX_I && --i > 0)
 	{
 		sq.r = sq.r * z.i;

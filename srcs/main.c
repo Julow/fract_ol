@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:50:26 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/03 17:31:58 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/14 12:05:23 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void		env_init(t_env *env, void *mlx)
 	switch_color(env);
 	env->zoom = 200;
 	env->max_loop = DEF_LOOP * 5;
+	env->offset_loop = 0;
 	env->offset = LPT(-env->fract.startpos.x, -env->fract.startpos.y);
 	env->mousepos = LPT(0, 0);
 	env->mousedown = FALSE;
@@ -75,9 +76,10 @@ int				main(int argc, char **argv)
 	ft_putstr("==============================\n");
 	if (argc > 1 && !load_env(mlx, argv[1]))
 		return (1);
-	else if (argc <= 1 && !load_env(mlx, "mandelbrot"))
+	else if (argc <= 1)
 		error("Error: Please specify a fractale.\n");
 	ft_putstr("'Esc' to quit\n'c' to change colors\n'r' to reset position\n");
+	ft_putstr("'p' to print debug\n");
 	mlx_loop(mlx);
 	return (0);
 }

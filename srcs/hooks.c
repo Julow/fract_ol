@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:58:52 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/03 17:31:47 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/14 12:10:38 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,15 @@
 #include <mlx.h>
 #include <math.h>
 
-static void		write_debug(t_env *env)
+static void		print_debug(t_env *env)
 {
 	t_string		tmp;
 
 	ft_stringini(&tmp);
 	ft_stringadd(&tmp, "max_loop: ");
 	ft_stringaddi(&tmp, env->max_loop);
+	ft_stringadd(&tmp, " + ");
+	ft_stringaddi(&tmp, env->offset_loop);
 	mlx_string_put(env->mlx, env->win, 10, 20, 0xFF0000, tmp.content);
 	ft_stringclr(&tmp);
 	ft_stringadd(&tmp, "pos: ");
@@ -59,7 +61,7 @@ int				expose_hook(void *param)
 	env = (t_env*)param;
 	draw_fractale(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
-	write_debug(env);
+	//print_debug(env);
 	return (0);
 }
 
@@ -79,9 +81,11 @@ int				key_hook(int key, void *param)
 	else if (key == 65363)
 		env->offset.x += 50;
 	else if (key == 65451)
-		env->max_loop += 1;
+		env->offset_loop += 1;
 	else if (key == 65453)
-		env->max_loop -= 1;
+		env->offset_loop -= 1;
+	else if (key == 'p')
+		return (print_debug(env), 0);
 	else if (key == 'c')
 		switch_color(env);
 	else if (key == 'r')
