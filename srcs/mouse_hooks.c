@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/16 14:36:16 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/14 12:18:27 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/16 13:59:32 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ int				mouseup_hook(int key, int x, int y, void *param)
 	return (0);
 }
 
-inline int		get_loops(long double zoom)
+static int		get_loops(long double zoom)
 {
 	int				i;
 
 	i = 0;
-	while ((zoom /= 1.2) > 1)
+	while ((zoom /= 1.3) > 1)
 		i++;
-	return (i * 2 + DEF_LOOP);
+	return (i * 5 + DEF_LOOP);
 }
 
 int				mousedown_hook(int key, int x, int y, void *param)

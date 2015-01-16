@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:58:52 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/14 12:10:38 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/16 13:40:40 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,41 +59,36 @@ int				expose_hook(void *param)
 	t_env			*env;
 
 	env = (t_env*)param;
-	draw_fractale(env);
+	env->fract.draw(env);
 	mlx_put_image_to_window(env->mlx, env->win, env->img->img, 0, 0);
-	//print_debug(env);
 	return (0);
 }
 
 int				key_hook(int key, void *param)
 {
-	t_env			*env;
-
-	env = (t_env*)param;
 	if (key == 65307)
-		env_exit(env);
+		env_exit((t_env*)param);
 	else if (key == 65362)
-		env->offset.y -= 50;
+		((t_env*)param)->offset.y -= 50;
 	else if (key == 65364)
-		env->offset.y += 50;
+		((t_env*)param)->offset.y += 50;
 	else if (key == 65361)
-		env->offset.x -= 50;
+		((t_env*)param)->offset.x -= 50;
 	else if (key == 65363)
-		env->offset.x += 50;
+		((t_env*)param)->offset.x += 50;
 	else if (key == 65451)
-		env->offset_loop += 1;
+		((t_env*)param)->offset_loop += 1;
 	else if (key == 65453)
-		env->offset_loop -= 1;
+		((t_env*)param)->offset_loop -= 1;
 	else if (key == 'p')
-		return (print_debug(env), 0);
+		return (print_debug((t_env*)param), 0);
 	else if (key == 'c')
-		switch_color(env);
+		switch_color((t_env*)param);
 	else if (key == 'r')
-		reset_pos(env);
+		reset_pos((t_env*)param);
 	else
 		return (0);
-	env->rerender = TRUE;
-	return (0);
+	return (((t_env*)param)->rerender = TRUE, 0);
 }
 
 int				loop_hook(void *param)

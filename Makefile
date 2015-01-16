@@ -6,65 +6,69 @@
 #    By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2014/12/13 19:48:41 by jaguillo          #+#    #+#              #
-#    Updated: 2014/12/13 19:48:43 by jaguillo         ###   ########.fr        #
+#    Updated: 2015/01/16 13:53:41 by jaguillo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fractol
 
-H_DIR = h/
-C_DIR = srcs/
-O_DIR = o/
+H_DIR = h
+C_DIR = srcs
+O_DIR = o
+
 LIBFT = libft/
 
 FLAGS = -Wall -Wextra -Werror -O3
 LINKS = -I$(H_DIR) -I$(LIBFT) -L$(LIBFT) -L/usr/X11/lib -lft -lmlx -lX11 -lXext -lm
 DEBUG = 0
 
-C_FILES = $(shell ls -1 $(C_DIR) | grep "\.c")
+C_FILES = $(shell find $(C_DIR) -type f -print | grep "\.c")
+C_DIRS = $(shell find $(C_DIR) -type d -print)
 
-O_FILES = $(addprefix $(O_DIR),$(C_FILES:.c=.o))
+O_DIRS = $(C_DIRS:$(C_DIR)/%=$(O_DIR)/%)
+O_FILES = $(C_FILES:$(C_DIR)/%.c=$(O_DIR)/%.o)
 
 all:
-	@(if [ "$(DEBUG)" -eq "1" ]; then \
-			make -C $(LIBFT) debug; else \
-			make -C $(LIBFT); fi \
-		|| (echo "\033[0;31m$(LIBFT)\033[0;0m" && exit 1)) \
-	| grep -v "Nothing to be done" || echo "" > /dev/null
 	@if [ "$(DEBUG)" -eq "1" ]; then \
-		make -j3 _debug $(NAME); else \
-		make -j3 $(NAME); fi
+		make -C $(LIBFT) debug; \
+		make -j4 _debug $(NAME); else \
+		make -C $(LIBFT); \
+		make -j4 $(NAME); fi
 
 $(NAME): $(O_FILES)
-	@gcc $(FLAGS) -o $@ $(O_FILES) $(LINKS) \
-	&& printf "\033[0;32m%-24s\033[1;30m<<--\033[0;0m\n" "$@" \
-	|| printf "\033[0;31m%-24s\033[1;30m<<--\033[0;0m\n" "$@"
+	@gcc $(FLAGS) -o $@ $^ $(LINKS) && printf "\033[0;32m" || printf "\033[0;31m"
+	@printf "%-34s \033[1;30m<<--\033[0;0m\n" "$@"
 
-$(O_DIR)%.o: $(C_DIR)%.c
-	@mkdir $(O_DIR) 2> /dev/null || echo "" > /dev/null
-	@printf "\033[1;30m"
-	@gcc $(FLAGS) -o $@ -c $< $(LINKS) \
-	&& printf "\033[0;0m%-24s\033[1;30m-->>	\033[0;32m$@\033[0;0m\n" "$<" \
-	|| (printf "\033[0;0m%-24s\033[1;30m-->>	\033[0;31m$@\033[0;0m\n" "$<" \
+$(O_DIR)/%.o: $(C_DIR)/%.c
+	@mkdir -p $(O_DIRS) $(O_DIR) 2> /dev/null || echo "" > /dev/null
+	@gcc $(FLAGS) $(LINKS) -o $@ -c $< \
+	&& printf "\033[0;0m%-34s\033[1;30m -->>\t\033[0;32m$@\033[0;0m\n" "$<" \
+	|| (printf "\033[0;0m%-34s\033[1;30m -->>\t\033[0;31m$@\033[0;0m\n" "$<" \
 		&& exit 1)
 
 debug: _debug all
 
-clean:
-	@rm $(O_FILES) 2> /dev/null || echo "" > /dev/null
-	@rmdir $(O_DIR) 2> /dev/null || echo "" > /dev/null
+clean: _clean
 	@make -C $(LIBFT) clean
 
-fclean: clean
+fclean: _fclean
 	@make -C $(LIBFT) fclean
-	@rm $(NAME) 2> /dev/null || echo "" > /dev/null
 
 re: fclean all
 
 rebug: fclean debug
 
+_clean:
+	@rm $(O_FILES) 2> /dev/null || echo "" > /dev/null
+	@rmdir $(O_DIRS) $(O_DIR) 2> /dev/null || echo "" > /dev/null
+
+_fclean: _clean
+	@rm $(NAME) 2> /dev/null || echo "" > /dev/null
+
+_re: _fclean all
+
 _debug:
-	$(eval FLAGS = -Wall -Wextra -g)
+	$(eval FLAGS = -Wall -Wextra -g -D DEBUG_MODE)
 	$(eval DEBUG = 1)
 
-.PHONY: all debug clean fclean re rebug _debug
+.PHONY: all debug clean fclean re rebug _clean _fclean _re _debug

@@ -6,23 +6,17 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:50:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/14 12:03:35 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/16 13:57:58 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FRACTOL_H
 # define FRACTOL_H
 
-/*
-** fractales from http://www.lifesmith.com/formulas.html
-*/
-
 # include "libft.h"
 
 # define WIDTH		590
 # define HEIGHT		440
-
-# define MIDDLE		(PT(WIDTH / 2, HEIGHT / 2))
 
 # define DEF_LOOP	30
 
@@ -47,7 +41,7 @@ typedef struct	s_ni
 typedef struct	s_fract
 {
 	char			*name;
-	int				(*f)();
+	void			(*draw)();
 	t_bool			mouserender;
 	t_pt			startpos;
 }				t_fract;
@@ -79,8 +73,8 @@ void			env_exit(t_env *env);
 ** utils.c
 */
 t_string		*ft_stringnews4(char *s1, char *s2, char *s3, char *s4);
-t_ni			ft_ni_mult(t_ni a, t_ni b);
-t_ni			ft_ni_plus(t_ni a, t_ni b);
+inline t_ni		ft_ni_mult(t_ni a, t_ni b);
+inline t_ni		ft_ni_plus(t_ni a, t_ni b);
 void			error(char *str);
 
 /*
@@ -95,8 +89,14 @@ void			ft_imagekil(void *mlx, t_image *img);
 t_bool			get_fractale(t_env *env, char *name);
 void			draw_fractale(t_env *env);
 
+void			mandelbrot(t_env *env);
+
+void			julia(t_env *env);
+
 /*
 ** colors.c
+** mandelbrot.c
+** julia.c
 */
 void			switch_color(t_env *env);
 
