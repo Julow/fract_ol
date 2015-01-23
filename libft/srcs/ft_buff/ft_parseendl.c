@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_resalpha.c                                      :+:      :+:    :+:   */
+/*   ft_parseendl.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2014/12/17 17:25:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/12/17 17:25:52 by jaguillo         ###   ########.fr       */
+/*   Created: 2015/01/13 15:27:51 by jaguillo          #+#    #+#             */
+/*   Updated: 2015/01/13 15:33:32 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void			ft_resalpha(t_color *c, t_color bg)
+void			ft_parseendl(t_buff *buff)
 {
-	t_big			delta;
+	char			c;
 
-	if (INVI(*c))
-	{
-		*c = bg;
-		return ;
-	}
-	delta = BIG(c->b.a) / 255;
-	c->b.a = 255;
-	c->b.r = ft_mix(c->b.r, bg.b.r, delta);
-	c->b.g = ft_mix(c->b.g, bg.b.g, delta);
-	c->b.b = ft_mix(c->b.b, bg.b.b, delta);
+	c = '\0';
+	while ((c = ft_buffget(buff)) != '\n' && c != '\0')
+		buff->i++;
+	if (c == '\n')
+		buff->i++;
 }
