@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/01/23 13:58:00 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/23 14:02:43 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/23 14:10:42 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void		spiral_trail(t_env *env, t_lpt pt)
 	double			t;
 	t_lpt			last;
 
-	i = (env->max_loop + env->offset_loop) * 500;
+	i = (env->max_loop + env->offset_loop) * 250;
 	last = pt;
 	while (--i > 0)
 	{
@@ -28,7 +28,8 @@ static void		spiral_trail(t_env *env, t_lpt pt)
 		pt = LPT(1 + u * (pt.x * cos(t) - pt.y * sin(t)),
 			u * (pt.x * sin(t) + pt.y * cos(t)));
 		ft_drawline(env->img, PT(pt.x - env->offset.x, pt.y - env->offset.y),
-			PT(last.x - env->offset.x, last.y - env->offset.y), env->color(env, i));
+			PT(last.x - env->offset.x, last.y - env->offset.y),
+			env->color(env, i));
 		last = pt;
 	}
 }

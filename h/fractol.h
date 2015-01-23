@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:50:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/23 13:58:25 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/23 14:09:57 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,20 @@
 
 # include "libft.h"
 
-# define WIDTH		590
-# define HEIGHT		440
+# define WIDTH			590
+# define HEIGHT			440
 
-# define DEF_LOOP	30
+# define MIDDLE			PT(WIDTH / 2, HEIGHT / 2)
 
-# define MAX_I		8
+# define DEF_LOOP		30
 
-# define LPT(x,y)	((t_lpt){(x), (y)})
+# define MAX_I			8
 
-# define NI(r,i)	((t_ni){(r), (i)})
+# define LPT(x,y)		((t_lpt){(x), (y)})
+
+# define NI(r,i)		((t_ni){(r), (i)})
+
+# define FRACT(n,f,m,p)	((t_fract){n, f, m, p})
 
 typedef struct	s_lpt
 {
