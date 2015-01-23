@@ -6,15 +6,15 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/11/03 15:39:40 by jaguillo          #+#    #+#             */
-/*   Updated: 2014/11/03 15:39:41 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/16 22:49:05 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_bool			ft_isascii(int c)
+inline t_bool	ft_isascii(int c)
 {
 	if (c < 0 || c > 127)
-		return (FALSE);
-	return (TRUE);
+		return (false);
+	return (true);
 }
