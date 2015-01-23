@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/16 14:36:16 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/16 13:59:32 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/23 14:15:15 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int				mouseup_hook(int key, int x, int y, void *param)
 
 	env = (t_env*)param;
 	if (key == 1)
-		env->mousedown = FALSE;
+		env->mousedown = false;
 	(void)x;
 	(void)y;
 	return (0);
@@ -43,7 +43,7 @@ int				mousedown_hook(int key, int x, int y, void *param)
 
 	env = (t_env*)param;
 	if (key == 1)
-		env->mousedown = TRUE;
+		env->mousedown = true;
 	else if (key == 4 || (key == 5 && env->zoom > 10))
 	{
 		pos = LPT(env->offset.x + x, env->offset.y + y);
@@ -52,7 +52,7 @@ int				mousedown_hook(int key, int x, int y, void *param)
 		env->offset.x += (tmp.r - (pos.x / env->zoom)) * env->zoom;
 		env->offset.y += (tmp.i - (pos.y / env->zoom)) * env->zoom;
 		env->max_loop = get_loops(env->zoom);
-		env->rerender = TRUE;
+		env->rerender = true;
 	}
 	return (0);
 }
@@ -68,10 +68,10 @@ int				mousemove_hook(int x, int y, void *param)
 	{
 		env->offset.x += env->mousepos.x - pos.x;
 		env->offset.y += env->mousepos.y - pos.y;
-		env->rerender = TRUE;
+		env->rerender = true;
 	}
 	else if (env->fract.mouserender)
-		env->rerender = TRUE;
+		env->rerender = true;
 	env->mousepos.x = pos.x;
 	env->mousepos.y = pos.y;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:58:52 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/16 13:40:40 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/23 14:14:50 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static void		reset_pos(t_env *env)
 	env->max_loop = DEF_LOOP * 5;
 	env->offset = LPT(-env->fract.startpos.x, -env->fract.startpos.y);
 	env->mousepos = LPT(0, 0);
-	env->mousedown = FALSE;
-	env->rerender = TRUE;
+	env->mousedown = false;
+	env->rerender = true;
 }
 
 int				expose_hook(void *param)
@@ -88,7 +88,7 @@ int				key_hook(int key, void *param)
 		reset_pos((t_env*)param);
 	else
 		return (0);
-	return (((t_env*)param)->rerender = TRUE, 0);
+	return (((t_env*)param)->rerender = true, 0);
 }
 
 int				loop_hook(void *param)
@@ -99,7 +99,7 @@ int				loop_hook(void *param)
 	if (env->rerender)
 	{
 		expose_hook(param);
-		env->rerender = FALSE;
+		env->rerender = false;
 	}
 	return (0);
 }

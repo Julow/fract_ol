@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:50:26 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/23 14:05:06 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/23 14:15:02 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void		env_init(t_env *env, void *mlx)
 	env->offset_loop = 0;
 	env->offset = LPT(-env->fract.startpos.x, -env->fract.startpos.y);
 	env->mousepos = LPT(0, 0);
-	env->mousedown = FALSE;
-	env->rerender = FALSE;
+	env->mousedown = false;
+	env->rerender = false;
 	mlx_expose_hook(env->win, &expose_hook, env);
 	mlx_key_hook(env->win, &key_hook, env);
 	mlx_loop_hook(env->mlx, &loop_hook, env);
@@ -51,10 +51,10 @@ static t_bool	load_env(void *mlx, char *arg)
 		ft_putstr_fd(arg, 2);
 		ft_putstr_fd("\n", 2);
 		free(env);
-		return (FALSE);
+		return (false);
 	}
 	env_init(env, mlx);
-	return (TRUE);
+	return (true);
 }
 
 void			env_exit(t_env *env)

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/14 12:46:17 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/16 13:56:00 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/23 14:15:50 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_color	color0(t_env *env, int loop)
 
 	if (loop == (env->max_loop + env->offset_loop))
 		return (C(0xFF000000));
-	c.b = RGB(255, loop * 255 / (env->max_loop + env->offset_loop), 0);
+	c = RGB(255, loop * 255 / (env->max_loop + env->offset_loop), 0);
 	c.b.a = 0xFF;
 	return (c);
 }
@@ -44,17 +44,17 @@ static t_color	color2(t_env *env, int loop)
 		return (C(0xFF000000));
 	loop = loop * 600 / (env->max_loop + env->offset_loop);
 	if (loop < 100)
-		c.b = RGB(255, loop * 25, 0);
+		c = RGB(255, loop * 25, 0);
 	else if (loop < 200)
-		c.b = RGB(255 - ((loop - 100) * 25), 255, 0);
+		c = RGB(255 - ((loop - 100) * 25), 255, 0);
 	else if (loop < 300)
-		c.b = RGB(0, 255, (loop - 200) * 25);
+		c = RGB(0, 255, (loop - 200) * 25);
 	else if (loop < 400)
-		c.b = RGB(0, 255 - ((loop - 300) * 25), 255);
+		c = RGB(0, 255 - ((loop - 300) * 25), 255);
 	else if (loop < 500)
-		c.b = RGB((loop - 400) * 25, 0, 255);
+		c = RGB((loop - 400) * 25, 0, 255);
 	else
-		c.b = RGB(255, 0, 255 - ((loop - 500) * 25));
+		c = RGB(255, 0, 255 - ((loop - 500) * 25));
 	c.b.a = 255;
 	return (c);
 }
