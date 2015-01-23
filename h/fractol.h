@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:50:51 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/16 13:57:58 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/23 13:58:25 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,10 @@ void			draw_fractale(t_env *env);
 void			mandelbrot(t_env *env);
 
 void			julia(t_env *env);
+
+void			ikeda(t_env *env);
+
+void			spiral(t_env *env);
 
 /*
 ** colors.c

@@ -6,7 +6,7 @@
 /*   By: jaguillo <jaguillo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/12/13 19:50:26 by jaguillo          #+#    #+#             */
-/*   Updated: 2015/01/14 12:05:23 by jaguillo         ###   ########.fr       */
+/*   Updated: 2015/01/23 14:05:06 by jaguillo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			env_exit(t_env *env)
 	ft_stringkil(env->title);
 	ft_imagekil(env->mlx, env->img);
 	free(env);
-	exit(1);
+	exit(0);
 }
 
 int				main(int argc, char **argv)
@@ -72,7 +72,8 @@ int				main(int argc, char **argv)
 
 	if ((mlx = mlx_init()) == NULL)
 		error("Error: mlx_init fail.\n");
-	ft_putstr("Fract'ol\nSupported fractales: Mandelbrot(0), Julia(1), 2\n");
+	ft_putstr("Fract'ol\nSupported fractales: Mandelbrot(0), Julia(1), "
+		"Ikeda(2), Spiral(3)\n");
 	ft_putstr("==============================\n");
 	if (argc > 1 && !load_env(mlx, argv[1]))
 		return (1);
